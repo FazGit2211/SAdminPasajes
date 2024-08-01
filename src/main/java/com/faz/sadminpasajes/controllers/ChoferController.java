@@ -4,12 +4,11 @@ import com.faz.sadminpasajes.models.Chofer;
 import com.faz.sadminpasajes.services.ChoferService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("admin/chofer")
@@ -36,13 +35,12 @@ public class ChoferController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Chofer> actChofer(@PathVariable int id,@RequestBody Chofer ch){
-        ResponseEntity<Chofer> choferExistente = chServ.obtenerPorId(id);
-        System.out.println(choferExistente.getBody());
-        if(!choferExistente.getBody().equals(null)){
-            System.out.println("Existe el chofer");
-            return chServ.crearChofer(ch);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Void> actChofer(@PathVariable int id,@RequestBody Chofer ch){
+        return chServ.actualizar(id,ch);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBy(@PathVariable int id){
+        return chServ.delete(id);
     }
 }

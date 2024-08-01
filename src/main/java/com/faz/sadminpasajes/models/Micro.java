@@ -2,27 +2,28 @@ package com.faz.sadminpasajes.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Micro {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Basic
-    @NotNull
     @NotBlank(message = "numero can´t be empty value")
     private String numero;
 
-    @NotNull
     @NotBlank(message = "linea can´t be empty value")
     private String linea;
 
-    @NotNull
-    @NotBlank(message = "capacidad can´t be empty value")
+    
     private int capacidad;
 
+    @ManyToOne
+    private Empresa empresaMicro;
+
+    public Micro(){}
 
     public Micro(String numero, String linea, int capacidad) {
         this.numero = numero;
@@ -56,5 +57,9 @@ public class Micro {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public void setEmpresa(Empresa empresa){
+        empresaMicro = empresa;
     }
 }
