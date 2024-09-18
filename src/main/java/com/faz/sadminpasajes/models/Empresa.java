@@ -31,10 +31,14 @@ public class Empresa {
     @OneToMany(mappedBy = "empresaPasajero")
     private Collection<Pasajero> pasajeros;
 
+    @OneToMany(mappedBy = "empresaPasaje")
+    private Collection<Pasaje> pasajes;
+
     public Empresa() {
         choferes = new ArrayList<>();
         micros = new HashSet<>();
         pasajeros = new LinkedList<>();
+        pasajes = new HashSet<>();
     }
 
     public Empresa(String nombre, String cuil_cuit) {
@@ -87,4 +91,19 @@ public class Empresa {
         setCuil_cuit(empresaUpdate.getCuil_cuit());
     }
 
+    public void addPasaje(Pasaje pasaje){
+        if(!pasajes.contains(pasaje)){
+            pasajes.add(pasaje);
+            pasaje.setEmpresa(this);
+        }
+    }
+
+
+    public Collection<Micro> getMicros(){
+        return this.micros;
+    }
+
+    public Collection<Pasajero> getPasajeros(){
+        return pasajeros;
+    }
 }

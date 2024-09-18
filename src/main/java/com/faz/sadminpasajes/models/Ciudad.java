@@ -24,7 +24,6 @@ public class Ciudad {
     @NotBlank
     private String localidad;
 
-    
     private float distancia;
 
     public Ciudad(){}
@@ -47,5 +46,9 @@ public class Ciudad {
 
     public float getDistancia(){
         return this.distancia;
+    }
+
+    public float calcularDistancias(Ciudad ciudadOrigen, Ciudad ciudadDestino){
+        return ciudadOrigen.getDistancia() + ciudadDestino.getDistancia();
     }
 }

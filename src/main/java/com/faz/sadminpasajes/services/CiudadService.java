@@ -16,6 +16,8 @@ public class CiudadService {
     @Autowired
     private CiudadRepository ciudadRepository;
 
+    private Ciudad ciudad = new Ciudad();
+
     public ResponseEntity<Void> create(Ciudad ciudad){
         Optional<Ciudad> exist = ciudadRepository.findByIdAndNombre(ciudad.getId(), ciudad.getNombre());
         if (!exist.isPresent()) {
@@ -32,5 +34,19 @@ public class CiudadService {
     public ResponseEntity<Ciudad> getByIdAndNombre(int id, String nom){
         Optional<Ciudad> exist = ciudadRepository.findByIdAndNombre(id, nom);
         return !exist.isPresent() ? ResponseEntity.ok().body(exist.get()) : ResponseEntity.badRequest().build();
+    }
+
+    public float getDistancia(String ciudadOrigen, String ciudadDestino){
+        Optional<Ciudad> existCiudadOrigen = ciudadRepository.findByNombre(ciudadOrigen);
+        Optional<Ciudad> existCiudadDestino = ciudadRepository.findByNombre(ciudadDestino);
+        
+        if(existCiudadOrigen.isPresent() && existCiudadDestino.isPresent()){
+            Ciudad ciudadOrig = existCiudadOrigen.get();
+            Ciudad ciudadDest = existCiudadDestino.get();
+            System.out.println("Estan presentes las ciudades");
+            return ciudad.calcularDistancias(ciudadOrig,ciudadDest);
+        }
+
+        return 0;
     }
 }

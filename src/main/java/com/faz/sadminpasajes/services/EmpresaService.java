@@ -1,10 +1,12 @@
 package com.faz.sadminpasajes.services;
 
-import com.faz.sadminpasajes.models.Chofer;
+
 import com.faz.sadminpasajes.models.Empresa;
-import com.faz.sadminpasajes.repositorys.ChoferRepository;
+import com.faz.sadminpasajes.models.Micro;
 import com.faz.sadminpasajes.repositorys.EmpresaRepository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,6 @@ import org.springframework.stereotype.Service;
 public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
-
-    @Autowired
-    private ChoferRepository choferRepository;
 
     public ResponseEntity<Empresa> create(Empresa emp){
         Optional<Empresa> estaEmpresa = empresaRepository.findByNombre(emp.getNombre());
@@ -49,5 +48,31 @@ public class EmpresaService {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    public ResponseEntity<Void> addMicroEmpresa(String nombre,Micro micro){
+        Optional<Empresa> empresaExist = empresaRepository.findByNombre(nombre);
+        if (empresaExist.isPresent()) {
+            try {
+                Empresa empresa = empresaExist.get();
+                empresa.addMicro(micro);
+                empresaRepository.save(empresa);
+                return ResponseEntity.ok().build();
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("Error" + e.getMessage());
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+    public HashSet<Micro> getByIdMicro(String nombre){
+        Optional<Empresa> empresaExist = empresaRepository.findByNombre(nombre);
+        if(empresaExist.isPresent()){
+            HashSet<Micro> micros = new HashSet<>(empresaExist.get().getMicros());
+            return micros;
+        }
+        return null;
     }
 }

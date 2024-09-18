@@ -6,6 +6,8 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.GenerationType;
 
 @Entity
@@ -20,20 +22,18 @@ public class Destino {
 
     private Date llegada;
 
-    private String ciudadOrigen;
+    @ManyToOne
+    private Ciudad ciudadOrigen;
 
-    private String ciudadDestino;
+    @ManyToOne
+    private Ciudad ciudadDestino;
+
+    @OneToOne(mappedBy = "destino")
+    private Pasaje pasaje;
 
 
     public Destino(){}
 
-    public Destino(Date fechaSalida, Date fechaLlegada, String ciudadOrigen, String ciudadDestino){
-        this.salida = fechaSalida;
-        this.llegada = fechaLlegada;
-        this.ciudadOrigen = ciudadOrigen;
-        this.ciudadDestino = ciudadDestino;
-        
-    }
 
     public int getId(){
         return id;
@@ -47,11 +47,13 @@ public class Destino {
         return this.llegada;
     }
 
-    public String getCiudadOrigen(){
-        return this.ciudadOrigen;
+    public Ciudad getCiudadOrigen(){
+        return ciudadOrigen;
     }
 
-    public String getCiudadDestino(){
-        return this.ciudadDestino;
+    public Ciudad getCiudadDestino(){
+        return ciudadDestino;
     }
+
+
 }

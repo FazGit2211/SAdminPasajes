@@ -20,15 +20,16 @@ public class Micro {
     
     private int capacidad;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Empresa empresaMicro;
 
     public Micro(){}
 
-    public Micro(String numero, String linea, int capacidad) {
-        this.numero = numero;
+    public Micro(String num,String linea, int capacidad, Empresa empresa){
+        this.numero = num;
         this.linea = linea;
         this.capacidad = capacidad;
+        this.empresaMicro = empresa;
     }
 
     public int getId() {

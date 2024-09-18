@@ -4,17 +4,21 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.faz.sadminpasajes.models.Ciudad;
 import com.faz.sadminpasajes.services.CiudadService;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", methods = {RequestMethod.GET,RequestMethod.OPTIONS})
 @RequestMapping("admin/ciudad")
 public class CiudadController {
 
@@ -34,5 +38,10 @@ public class CiudadController {
     @GetMapping("/{id}/{nombre}")
     public ResponseEntity<Ciudad> getByIdAndNombre(@PathVariable int id, @PathVariable String nombre){
         return ciudadService.getByIdAndNombre(id,nombre);
+    }
+
+    @GetMapping("/calcular")
+    public float obtenerDistancias(@RequestParam String ciudadOrigen, @RequestParam String ciudadDestino){
+        return ciudadService.getDistancia(ciudadOrigen, ciudadDestino);
     }
 }

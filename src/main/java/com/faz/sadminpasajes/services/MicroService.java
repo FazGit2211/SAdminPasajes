@@ -19,7 +19,7 @@ public class MicroService {
     private MicroRepository microRepository;
 
     public ResponseEntity<Void> create(Micro micro){
-        Optional<Micro> exist = microRepository.findById(micro.getId());
+        Optional<Micro> exist = microRepository.findByIdAndNumero(micro.getId(), micro.getNumero());
         if(!exist.isPresent()){
             microRepository.save(micro);
             return ResponseEntity.ok().build();
