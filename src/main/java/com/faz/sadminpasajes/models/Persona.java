@@ -3,12 +3,18 @@ package com.faz.sadminpasajes.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name= "tipo_persona", discriminatorType = DiscriminatorType.STRING)
 @Entity
-public class Persona {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public abstract class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,46 +28,4 @@ public class Persona {
     private String apellido;
     @NotNull
     private int dni;
-
-    public Persona() {
-    }
-
-    public Persona(String nombre, String apellido, int dni) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-
 }

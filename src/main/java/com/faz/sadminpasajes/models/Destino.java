@@ -8,9 +8,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.GenerationType;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Destino {
 
     @Id
@@ -30,30 +36,5 @@ public class Destino {
 
     @OneToOne(mappedBy = "destino")
     private Pasaje pasaje;
-
-
-    public Destino(){}
-
-
-    public int getId(){
-        return id;
-    }
-
-    public Date getSalida(){
-        return this.salida;
-    }
-
-    public Date getLlegada(){
-        return this.llegada;
-    }
-
-    public Ciudad getCiudadOrigen(){
-        return ciudadOrigen;
-    }
-
-    public Ciudad getCiudadDestino(){
-        return ciudadDestino;
-    }
-
 
 }

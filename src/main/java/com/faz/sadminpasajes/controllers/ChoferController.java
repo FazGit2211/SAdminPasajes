@@ -1,8 +1,10 @@
 package com.faz.sadminpasajes.controllers;
 
 import com.faz.sadminpasajes.models.Chofer;
-import com.faz.sadminpasajes.services.ChoferService;
+import com.faz.sadminpasajes.services.ChoferServices;
+
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +17,16 @@ import java.util.List;
 public class ChoferController {
 
     @Autowired
-    private ChoferService chServ;
+    private ChoferServices choferServices;
 
+    @PostMapping
+    public ResponseEntity<Chofer> crearChoferes(@RequestBody @Valid Chofer chofer){
+       return choferServices.crearChofer(chofer);
+    }
 
     @GetMapping
     public List<Chofer> obtenerChoferes(){
-        return chServ.getAll();
+        return choferServices.getAll();
     }
 
-    @PostMapping
-    public ResponseEntity<Chofer> addChofer(@RequestBody @Valid Chofer chofer){
-        return chServ.crearChofer(chofer);
-    }
-
-    @GetMapping
-    @RequestMapping("/{id}")
-    public ResponseEntity<Chofer> obtPorId(@PathVariable int id){
-        return chServ.obtenerPorId(id);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> actChofer(@PathVariable int id,@RequestBody Chofer ch){
-        return chServ.actualizar(id,ch);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBy(@PathVariable int id){
-        return chServ.delete(id);
-    }
 }

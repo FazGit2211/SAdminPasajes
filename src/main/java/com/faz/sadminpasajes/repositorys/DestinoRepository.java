@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.faz.sadminpasajes.models.Destino;
 
-public interface DestinoRepository extends JpaRepository<Destino, Integer>{
+public interface DestinoRepository extends JpaRepository<Destino, Long>{
 
 }

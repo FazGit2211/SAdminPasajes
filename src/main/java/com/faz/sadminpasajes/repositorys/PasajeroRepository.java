@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.faz.sadminpasajes.models.Pasajero;
 
-public interface PasajeroRepository extends JpaRepository<Pasajero,Integer> {
+public interface PasajeroRepository extends JpaRepository<Pasajero,Long> {
 
 }

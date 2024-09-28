@@ -6,11 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pasaje {
 
     @Id
@@ -27,17 +32,8 @@ public class Pasaje {
     @NotBlank
     private float valor;
 
-    @ManyToOne
-    private Empresa empresaPasaje;
-
     @OneToOne
     @JoinColumn(name = "destino_id")
     private Destino destino;
-
-    public Pasaje(){}
-
-    public void setEmpresa(Empresa empresa){
-        this.empresaPasaje = empresa;
-    }
 
 }

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.faz.sadminpasajes.models.Micro;
 
-public interface MicroRepository extends JpaRepository<Micro,Integer> {
+public interface MicroRepository extends JpaRepository<Micro,Long> {
     Optional<Micro> findByIdAndNumero(int id,String numero);
 }

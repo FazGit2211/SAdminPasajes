@@ -6,8 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ciudad {
 
     @Id
@@ -25,20 +31,6 @@ public class Ciudad {
     private String localidad;
 
     private float distancia;
-
-    public Ciudad(){}
-
-    public int getId(){
-        return this.id;
-    }
-
-    public String getNombre(){
-        return this.nombre;
-    }
-
-    public String getProvincia(){
-        return this.provincia;
-    }
 
     public String getLocalidad(){
         return this.localidad;

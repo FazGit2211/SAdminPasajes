@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.faz.sadminpasajes.models.Ciudad;
 
-public interface CiudadRepository extends JpaRepository<Ciudad, Integer>{
+public interface CiudadRepository extends JpaRepository<Ciudad, Long>{
     Optional<Ciudad> findByNombre(String nom);
-    Optional<Ciudad> findByIdAndNombre(Integer id,String nom);
+    Optional<Ciudad> findByIdAndNombre(Long id,String nom);
 }

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.faz.sadminpasajes.models.Pasaje;
 
-public interface PasajeRepository extends JpaRepository<Pasaje,Integer> {
+public interface PasajeRepository extends JpaRepository<Pasaje,Long> {
 
 }

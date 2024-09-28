@@ -7,9 +7,13 @@ import java.util.LinkedList;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 
 @Entity
+@Data
+@AllArgsConstructor
 public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +26,16 @@ public class Empresa {
     @NotBlank(message = "cuil/cuit can´t be empty value")
     private String cuil_cuit;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    @OneToMany
     private Collection<Chofer> choferes;
 
-    @OneToMany(mappedBy = "empresaMicro")
+    @OneToMany
     private Collection<Micro> micros;
 
-    @OneToMany(mappedBy = "empresaPasajero")
+    @OneToMany
     private Collection<Pasajero> pasajeros;
 
-    @OneToMany(mappedBy = "empresaPasaje")
+    @OneToMany
     private Collection<Pasaje> pasajes;
 
     public Empresa() {
@@ -41,42 +45,16 @@ public class Empresa {
         pasajes = new HashSet<>();
     }
 
-    public Empresa(String nombre, String cuil_cuit) {
-        this.nombre = nombre;
-        this.cuil_cuit = cuil_cuit;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCuil_cuit() {
-        return cuil_cuit;
-    }
-
-    public void setCuil_cuit(String cuil_cuit) {
-        this.cuil_cuit = cuil_cuit;
-    }
 
     public void addChofer(Chofer ch){
         if(!choferes.contains(ch)){
             choferes.add(ch);
-            ch.setEmpresa(this);
         }
     }
 
     public void addMicro(Micro micro){
         if(!micros.contains(micro)){
             micros.add(micro);
-            micro.setEmpresa(this);
         }
     }
 
@@ -94,7 +72,6 @@ public class Empresa {
     public void addPasaje(Pasaje pasaje){
         if(!pasajes.contains(pasaje)){
             pasajes.add(pasaje);
-            pasaje.setEmpresa(this);
         }
     }
 

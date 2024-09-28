@@ -2,9 +2,15 @@ package com.faz.sadminpasajes.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Micro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,47 +26,13 @@ public class Micro {
     
     private int capacidad;
 
+    /*
     @ManyToOne(optional = true)
     private Empresa empresaMicro;
 
-    public Micro(){}
-
-    public Micro(String num,String linea, int capacidad, Empresa empresa){
-        this.numero = num;
-        this.linea = linea;
-        this.capacidad = capacidad;
-        this.empresaMicro = empresa;
+    public void setEmpresa(Empresa emp){
+        this.empresaMicro = emp;
     }
+    */
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getLinea() {
-        return linea;
-    }
-
-    public void setLinea(String linea) {
-        this.linea = linea;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public void setEmpresa(Empresa empresa){
-        empresaMicro = empresa;
-    }
 }
