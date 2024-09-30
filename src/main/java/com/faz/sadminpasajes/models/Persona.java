@@ -28,4 +28,9 @@ public abstract class Persona {
     private String apellido;
     @NotNull
     private int dni;
+
+    @NotNull
+    public int getDni() {
+        return dni;
+    }
 }

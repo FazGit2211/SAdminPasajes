@@ -16,5 +16,7 @@ public class Chofer extends Persona {
     public String getLicencia(){
         return this.licencia;
     }
+
+
  
 }

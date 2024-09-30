@@ -4,16 +4,10 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.faz.sadminpasajes.models.Ciudad;
-import com.faz.sadminpasajes.services.CiudadService;
+import com.faz.sadminpasajes.services.CiudadServices;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", methods = {RequestMethod.GET,RequestMethod.OPTIONS})
@@ -21,25 +15,20 @@ import com.faz.sadminpasajes.services.CiudadService;
 public class CiudadController {
 
     @Autowired
-    private CiudadService ciudadService;
+    private CiudadServices ciudadServices;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Ciudad ciudad){
-        return ciudadService.create(ciudad);
+    public ResponseEntity<Ciudad> create(@RequestBody Ciudad ciudad){
+        return ciudadServices.create(ciudad);
     }
 
     @GetMapping
     public Collection<Ciudad> getAll(){
-        return ciudadService.getAll();
-    }
-
-    @GetMapping("/{id}/{nombre}")
-    public ResponseEntity<Ciudad> getByIdAndNombre(@PathVariable int id, @PathVariable String nombre){
-        return ciudadService.getByIdAndNombre(id,nombre);
+        return ciudadServices.getAll();
     }
 
     @GetMapping("/calcular")
     public float obtenerDistancias(@RequestParam String ciudadOrigen, @RequestParam String ciudadDestino){
-        return ciudadService.getDistancia(ciudadOrigen, ciudadDestino);
+        return ciudadServices.calcularDistancias(ciudadOrigen,ciudadDestino);
     }
 }

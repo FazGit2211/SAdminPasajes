@@ -40,7 +40,7 @@ public class Ciudad {
         return this.distancia;
     }
 
-    public float calcularDistancias(Ciudad ciudadOrigen, Ciudad ciudadDestino){
-        return ciudadOrigen.getDistancia() + ciudadDestino.getDistancia();
+    public @NotBlank String getNombre() {
+        return this.nombre;
     }
 }

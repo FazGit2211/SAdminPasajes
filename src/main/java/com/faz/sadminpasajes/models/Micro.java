@@ -26,13 +26,11 @@ public class Micro {
     
     private int capacidad;
 
-    /*
-    @ManyToOne(optional = true)
-    private Empresa empresaMicro;
-
-    public void setEmpresa(Empresa emp){
-        this.empresaMicro = emp;
+    public int getId() {
+        return id;
     }
-    */
 
+    public @NotBlank(message = "numero can´t be empty value") String getNumero() {
+        return numero;
+    }
 }

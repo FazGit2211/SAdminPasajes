@@ -10,13 +10,15 @@ import org.springframework.http.ResponseEntity;
 import com.faz.sadminpasajes.models.Chofer;
 import com.faz.sadminpasajes.repositorys.ChoferRepository;
 import com.faz.sadminpasajes.services.ChoferServices;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ChoferImplementation implements ChoferServices {
 
     @Autowired
     private ChoferRepository chRepo;
 
+    @Override
     public ResponseEntity<Chofer> crearChofer(Chofer chofer){
         Optional<Chofer> estaChofer = chRepo.findByDni(chofer.getDni());
         if(!estaChofer.isPresent()){
@@ -28,6 +30,7 @@ public class ChoferImplementation implements ChoferServices {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     };
 
+    @Override
     public List<Chofer> getAll(){
         return chRepo.findAll();
     };
