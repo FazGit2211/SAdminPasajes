@@ -1,15 +1,19 @@
 package com.faz.sadminpasajes.controllers;
 
 import com.faz.sadminpasajes.models.Empresa;
+import com.faz.sadminpasajes.models.Micro;
 import com.faz.sadminpasajes.services.EmpresaServices;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,4 +33,13 @@ public class EmpresaController {
         return empresaServices.create(empresa);
     }
 
+    @GetMapping("/search/{nombre}")
+    public ResponseEntity<Empresa> obtenerEmpresaByNombre(@PathVariable String nombre){
+        return empresaServices.findByNombre(nombre);
+    }
+
+    @PutMapping("/addMicro/{id}")
+    public ResponseEntity<Empresa> agregarMicro(@PathVariable Long id, @RequestBody Micro micro){
+        return empresaServices.addMicro(micro, id);
+    }
 }
