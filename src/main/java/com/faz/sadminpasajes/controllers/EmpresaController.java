@@ -1,7 +1,6 @@
 package com.faz.sadminpasajes.controllers;
 
 import com.faz.sadminpasajes.models.Empresa;
-import com.faz.sadminpasajes.models.Micro;
 import com.faz.sadminpasajes.services.EmpresaServices;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -38,8 +37,8 @@ public class EmpresaController {
         return empresaServices.findByNombre(nombre);
     }
 
-    @PutMapping("/addMicro/{id}")
-    public ResponseEntity<Empresa> agregarMicro(@PathVariable Long id, @RequestBody Micro micro){
-        return empresaServices.addMicro(micro, id);
+    @PutMapping("/addMicro/{empresaId}/{microId}")
+    public ResponseEntity<Empresa> agregarMicro(@PathVariable Long empresaId, @PathVariable Long microId){
+        return empresaServices.addMicro(empresaId, microId);
     }
 }
