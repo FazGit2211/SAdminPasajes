@@ -9,9 +9,14 @@ import org.springframework.http.ResponseEntity;
 import com.faz.sadminpasajes.models.Chofer;
 import com.faz.sadminpasajes.models.Empresa;
 import com.faz.sadminpasajes.models.Micro;
+<<<<<<< HEAD
 import com.faz.sadminpasajes.repositorys.ChoferRepository;
+=======
+import com.faz.sadminpasajes.models.PasajeOferta;
+>>>>>>> main
 import com.faz.sadminpasajes.repositorys.EmpresaRepository;
 import com.faz.sadminpasajes.repositorys.MicroRepository;
+import com.faz.sadminpasajes.repositorys.PasajeEnOfertaRepository;
 import com.faz.sadminpasajes.services.EmpresaServices;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +30,11 @@ public class EmpresaServiceImplementation implements EmpresaServices {
     private MicroRepository microRepository;
 
     @Autowired
+<<<<<<< HEAD
     private ChoferRepository choferRepository;
+=======
+    private PasajeEnOfertaRepository pasajeEnOfertaRepository;
+>>>>>>> main
 
     @Override
     public ResponseEntity<Empresa> create(Empresa emp) {
@@ -65,6 +74,7 @@ public class EmpresaServiceImplementation implements EmpresaServices {
     }
 
     @Override
+<<<<<<< HEAD
     public ResponseEntity<Empresa> addChofer(Long empresaId, Long choferId) {
         Optional<Empresa> existeEmpresa = empresaRepository.findById(empresaId);
         Optional<Chofer> existeChofer = choferRepository.findById(choferId);
@@ -82,6 +92,24 @@ public class EmpresaServiceImplementation implements EmpresaServices {
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+=======
+    public ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje) {
+        try {
+            // TODO Auto-generated method stub
+            Optional<Empresa> existEmpresa = empresaRepository.findById(idEmpresa);
+            Optional<PasajeOferta> existPasajeOferta = pasajeEnOfertaRepository.findById(idPasaje);
+            if (existEmpresa.isPresent() && existPasajeOferta.isPresent()) {
+                Empresa empresa = existEmpresa.get();
+                PasajeOferta pasajeOferta = existPasajeOferta.get();
+                empresa.addPasaje(pasajeOferta);
+                return ResponseEntity.ok(empresaRepository.save(empresa));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
+        return ResponseEntity.badRequest().build();
+>>>>>>> main
     };
 
     private Empresa addEmpresa(Empresa empresa, Object obj){

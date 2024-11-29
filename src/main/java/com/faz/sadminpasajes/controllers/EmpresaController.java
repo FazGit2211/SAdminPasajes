@@ -41,4 +41,9 @@ public class EmpresaController {
     public ResponseEntity<Empresa> agregarMicro(@PathVariable Long empresaId, @PathVariable Long microId){
         return empresaServices.addMicro(empresaId, microId);
     }
+
+    @PutMapping("/addPasaje/{idEmpresa}/{idPasaje}")
+    public ResponseEntity<Empresa> addPasaje(@PathVariable Long idEmpresa,@PathVariable Integer idPasaje){
+        return empresaServices.addPasajeEnOferta(idEmpresa, idPasaje);
+    }
 }
