@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.faz.sadminpasajes.models.Empresa;
 import com.faz.sadminpasajes.models.Micro;
+import com.faz.sadminpasajes.models.PasajeOferta;
 import com.faz.sadminpasajes.repositorys.EmpresaRepository;
 import com.faz.sadminpasajes.repositorys.MicroRepository;
+import com.faz.sadminpasajes.repositorys.PasajeEnOfertaRepository;
 import com.faz.sadminpasajes.services.EmpresaServices;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class EmpresaServiceImplementation implements EmpresaServices {
 
     @Autowired
     private MicroRepository microRepository;
+
+    @Autowired
+    private PasajeEnOfertaRepository pasajeEnOfertaRepository;
 
     @Override
     public ResponseEntity<Empresa> create(Empresa emp) {
@@ -57,6 +62,25 @@ public class EmpresaServiceImplementation implements EmpresaServices {
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @Override
+    public ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje) {
+        try {
+            // TODO Auto-generated method stub
+            Optional<Empresa> existEmpresa = empresaRepository.findById(idEmpresa);
+            Optional<PasajeOferta> existPasajeOferta = pasajeEnOfertaRepository.findById(idPasaje);
+            if (existEmpresa.isPresent() && existPasajeOferta.isPresent()) {
+                Empresa empresa = existEmpresa.get();
+                PasajeOferta pasajeOferta = existPasajeOferta.get();
+                empresa.addPasaje(pasajeOferta);
+                return ResponseEntity.ok(empresaRepository.save(empresa));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
+        return ResponseEntity.badRequest().build();
     };
 
 }

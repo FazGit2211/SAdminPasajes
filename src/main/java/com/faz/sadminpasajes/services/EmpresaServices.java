@@ -13,4 +13,5 @@ public interface EmpresaServices {
     List<Empresa>  getAll();
     ResponseEntity<Empresa> findByNombre(String nombre);
     ResponseEntity<Empresa> addMicro(Micro micro, Long id);
+    ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje);
 }
