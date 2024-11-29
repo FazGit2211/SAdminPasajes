@@ -9,11 +9,8 @@ import org.springframework.http.ResponseEntity;
 import com.faz.sadminpasajes.models.Chofer;
 import com.faz.sadminpasajes.models.Empresa;
 import com.faz.sadminpasajes.models.Micro;
-<<<<<<< HEAD
 import com.faz.sadminpasajes.repositorys.ChoferRepository;
-=======
 import com.faz.sadminpasajes.models.PasajeOferta;
->>>>>>> main
 import com.faz.sadminpasajes.repositorys.EmpresaRepository;
 import com.faz.sadminpasajes.repositorys.MicroRepository;
 import com.faz.sadminpasajes.repositorys.PasajeEnOfertaRepository;
@@ -30,11 +27,10 @@ public class EmpresaServiceImplementation implements EmpresaServices {
     private MicroRepository microRepository;
 
     @Autowired
-<<<<<<< HEAD
     private ChoferRepository choferRepository;
-=======
+
+    @Autowired
     private PasajeEnOfertaRepository pasajeEnOfertaRepository;
->>>>>>> main
 
     @Override
     public ResponseEntity<Empresa> create(Empresa emp) {
@@ -49,7 +45,7 @@ public class EmpresaServiceImplementation implements EmpresaServices {
     }
 
     @Override
-    public ResponseEntity<Empresa> findByNombre(String nombre) {        
+    public ResponseEntity<Empresa> findByNombre(String nombre) {
         Optional<Empresa> existeEmpresa = empresaRepository.findByNombre(nombre);
         return (existeEmpresa.isPresent()) ? ResponseEntity.ok(existeEmpresa.get())
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -74,25 +70,25 @@ public class EmpresaServiceImplementation implements EmpresaServices {
     }
 
     @Override
-<<<<<<< HEAD
     public ResponseEntity<Empresa> addChofer(Long empresaId, Long choferId) {
         Optional<Empresa> existeEmpresa = empresaRepository.findById(empresaId);
         Optional<Chofer> existeChofer = choferRepository.findById(choferId);
         if (existeEmpresa.isPresent() && existeChofer.isPresent()) {
             try {
                 /*
-                Empresa empresa = existeEmpresa.get();
-                Chofer chofer = existeChofer.get();
-                empresa.addChofer(chofer);
-                empresaRepository.save(empresa);
-                */
+                 * Empresa empresa = existeEmpresa.get();
+                 * Chofer chofer = existeChofer.get();
+                 * empresa.addChofer(chofer);
+                 * empresaRepository.save(empresa);
+                 */
                 return ResponseEntity.ok(addEmpresa(existeEmpresa.get(), existeChofer));
             } catch (Exception e) {
                 System.out.println("Error:" + e);
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-=======
+    }
+
     public ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje) {
         try {
             // TODO Auto-generated method stub
@@ -109,18 +105,17 @@ public class EmpresaServiceImplementation implements EmpresaServices {
             System.out.println(e);
         }
         return ResponseEntity.badRequest().build();
->>>>>>> main
     };
 
-    private Empresa addEmpresa(Empresa empresa, Object obj){
-        if(obj instanceof Micro){
+    private Empresa addEmpresa(Empresa empresa, Object obj) {
+        if (obj instanceof Micro) {
             Micro micro = (Micro) obj;
-            empresa.addMicro(micro);                   
+            empresa.addMicro(micro);
         }
 
-        if(obj instanceof Chofer){
+        if (obj instanceof Chofer) {
             Chofer chofer = (Chofer) obj;
-            empresa.addChofer(chofer);            
+            empresa.addChofer(chofer);
         }
 
         return empresaRepository.save(empresa);
