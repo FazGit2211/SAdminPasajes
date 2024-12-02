@@ -5,6 +5,7 @@ import com.faz.sadminpasajes.services.EmpresaServices;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,28 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("admin/empresa")
+@RequestMapping(value = "admin/empresa",produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmpresaController {
     @Autowired
     private EmpresaServices empresaServices;
 
-    @GetMapping
-    public List<Empresa> getAll(){
+    @GetMapping()
+    public List<Empresa> getAllEmpresas(){
         return empresaServices.getAll();
     }
 
     @PostMapping
-    public ResponseEntity<Empresa> create(@RequestBody @Valid Empresa empresa){
+    public ResponseEntity<Empresa> addEmpresa(@RequestBody @Valid Empresa empresa){
         return empresaServices.create(empresa);
     }
 
     @GetMapping("/search/{nombre}")
-    public ResponseEntity<Empresa> obtenerEmpresaByNombre(@PathVariable String nombre){
+    public ResponseEntity<Empresa> getEmpresaByName(@PathVariable String nombre){
         return empresaServices.findByNombre(nombre);
     }
 
     @PutMapping("/addMicro/{empresaId}/{microId}")
-    public ResponseEntity<Empresa> agregarMicro(@PathVariable Long empresaId, @PathVariable Long microId){
+    public ResponseEntity<Empresa> addMicro(@PathVariable Long empresaId, @PathVariable Long microId){
         return empresaServices.addMicro(empresaId, microId);
     }
 

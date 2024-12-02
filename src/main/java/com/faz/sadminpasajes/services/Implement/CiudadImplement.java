@@ -1,18 +1,16 @@
-package com.faz.sadminpasajes.services.serviceImplementation;
+package com.faz.sadminpasajes.services.Implement;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
 import com.faz.sadminpasajes.models.Ciudad;
 import com.faz.sadminpasajes.repositorys.CiudadRepository;
 import com.faz.sadminpasajes.services.CiudadServices;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CiudadServiceImplementation implements CiudadServices {
+public class CiudadImplement implements CiudadServices {
 
     @Autowired
     private CiudadRepository ciudadRepository;

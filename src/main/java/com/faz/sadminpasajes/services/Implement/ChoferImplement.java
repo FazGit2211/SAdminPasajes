@@ -1,19 +1,17 @@
-package com.faz.sadminpasajes.services.serviceImplementation;
+package com.faz.sadminpasajes.services.Implement;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import com.faz.sadminpasajes.models.Chofer;
 import com.faz.sadminpasajes.repositorys.ChoferRepository;
 import com.faz.sadminpasajes.services.ChoferServices;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChoferImplementation implements ChoferServices {
+public class ChoferImplement implements ChoferServices {
 
     @Autowired
     private ChoferRepository chRepo;

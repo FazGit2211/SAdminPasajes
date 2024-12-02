@@ -1,4 +1,4 @@
-package com.faz.sadminpasajes.services.serviceImplementation;
+package com.faz.sadminpasajes.services.Implement;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import com.faz.sadminpasajes.services.MicroServices;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MicroServiceImplementation implements MicroServices {
+public class MicroImplement implements MicroServices {
 
     @Autowired
     private MicroRepository microRepository;

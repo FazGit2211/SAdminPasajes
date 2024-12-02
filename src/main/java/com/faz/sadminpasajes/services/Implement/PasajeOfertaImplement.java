@@ -1,4 +1,4 @@
-package com.faz.sadminpasajes.services.serviceImplementation;
+package com.faz.sadminpasajes.services.Implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
