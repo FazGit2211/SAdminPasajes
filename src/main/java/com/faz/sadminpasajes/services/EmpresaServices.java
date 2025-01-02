@@ -9,9 +9,16 @@ import com.faz.sadminpasajes.models.Empresa;
 public interface EmpresaServices {
 
     ResponseEntity<Empresa> create(Empresa emp);
-    List<Empresa>  getAll();
+
+    List<Empresa> getAll();
+
     ResponseEntity<Empresa> findByNombre(String nombre);
+
     ResponseEntity<Empresa> addMicro(Long empresaId, Long microId);
+
     ResponseEntity<Empresa> addChofer(Long empresaId, Long choferId);
+
     ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje);
+
+    ResponseEntity<Empresa> addImagenEmpresa(Long empresaId, byte[] imagen);
 }

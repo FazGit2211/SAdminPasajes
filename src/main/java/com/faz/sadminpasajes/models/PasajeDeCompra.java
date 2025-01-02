@@ -4,8 +4,10 @@ import java.util.Date;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PasajeDeCompra extends Pasaje{
     private Date fechaCompra;
 

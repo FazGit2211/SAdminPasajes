@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping(value = "admin/empresa",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "admin/enterprise",produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmpresaController {
     @Autowired
     private EmpresaServices empresaServices;
@@ -47,4 +46,5 @@ public class EmpresaController {
     public ResponseEntity<Empresa> addPasaje(@PathVariable Long idEmpresa,@PathVariable Integer idPasaje){
         return empresaServices.addPasajeEnOferta(idEmpresa, idPasaje);
     }
+
 }

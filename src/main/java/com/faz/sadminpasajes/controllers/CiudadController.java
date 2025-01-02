@@ -11,7 +11,7 @@ import com.faz.sadminpasajes.services.CiudadServices;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", methods = {RequestMethod.GET,RequestMethod.OPTIONS})
-@RequestMapping("admin/ciudad")
+@RequestMapping("admin/city")
 public class CiudadController {
 
     @Autowired
