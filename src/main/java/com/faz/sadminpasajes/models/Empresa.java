@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -25,6 +24,9 @@ public class Empresa {
     @NotBlank(message = "cuil/cuit can´t be empty value")
     private String cuil_cuit;
 
+    @Lob
+    private byte[] imagen;
+
     @OneToMany
     private Collection<Chofer> choferes;
 
@@ -32,45 +34,39 @@ public class Empresa {
     private Collection<Micro> micros;
 
     @OneToMany
-    private Collection<Pasajero> pasajeros;
-
-    @OneToMany
     private Collection<Pasaje> pasajes;
 
-
-    public void addChofer(Chofer ch){
-        if(!choferes.contains(ch)){
-            choferes.add(ch);
-        }
-    }
-
-    public void addMicro(Micro micro){
-        if(!micros.contains(micro)){
-            micros.add(micro);
-        }
-    }
-
-    public void deleteChofer(Chofer ch){
-        if(choferes.contains(ch)){
-            choferes.remove(ch);
-        }
-    }
-
-    public void addPasaje(Pasaje pasaje){
-        if(!pasajes.contains(pasaje)){
-            pasajes.add(pasaje);
-        }
-    }
-
-    public @NotBlank(message = "name can´t be empty value") String getNombre() {
-        return nombre;
-    }
-
-    public Collection<Micro> getMicros(){
-        return this.micros;
-    }
-
-    public Collection<Pasajero> getPasajeros(){
-        return pasajeros;
-    }
+    /*
+     * public void addChofer(Chofer ch){
+     * if(!choferes.contains(ch)){
+     * choferes.add(ch);
+     * }
+     * }
+     * 
+     * public void addMicro(Micro micro){
+     * if(!micros.contains(micro)){
+     * micros.add(micro);
+     * }
+     * }
+     * 
+     * public void deleteChofer(Chofer ch){
+     * if(choferes.contains(ch)){
+     * choferes.remove(ch);
+     * }
+     * }
+     * 
+     * public void addPasaje(Pasaje pasaje){
+     * if(!pasajes.contains(pasaje)){
+     * pasajes.add(pasaje);
+     * }
+     * }
+     * 
+     * public @NotBlank(message = "name can´t be empty value") String getNombre() {
+     * return nombre;
+     * }
+     * 
+     * public Collection<Micro> getMicros(){
+     * return this.micros;
+     * }
+     */
 }

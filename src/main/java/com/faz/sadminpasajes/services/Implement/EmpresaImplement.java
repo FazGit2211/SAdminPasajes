@@ -58,7 +58,7 @@ public class EmpresaImplement implements EmpresaServices {
             try {
                 Empresa empresa = existeEmpresa.get();
                 Micro microActual = existeMicro.get();
-                empresa.addMicro(microActual);
+                empresa.getMicros().add(microActual);
                 empresaRepository.save(empresa);
                 return ResponseEntity.ok(empresa);
             } catch (Exception e) {
@@ -90,17 +90,15 @@ public class EmpresaImplement implements EmpresaServices {
 
     public ResponseEntity<Empresa> addPasajeEnOferta(Long idEmpresa, Integer idPasaje) {
         try {
-            // TODO Auto-generated method stub
             Optional<Empresa> existEmpresa = empresaRepository.findById(idEmpresa);
             Optional<PasajeOferta> existPasajeOferta = pasajeEnOfertaRepository.findById(idPasaje);
             if (existEmpresa.isPresent() && existPasajeOferta.isPresent()) {
                 Empresa empresa = existEmpresa.get();
                 PasajeOferta pasajeOferta = existPasajeOferta.get();
-                empresa.addPasaje(pasajeOferta);
+                empresa.getPasajes().add(pasajeOferta);
                 return ResponseEntity.ok(empresaRepository.save(empresa));
             }
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e);
         }
         return ResponseEntity.badRequest().build();
@@ -109,14 +107,31 @@ public class EmpresaImplement implements EmpresaServices {
     private Empresa addEmpresa(Empresa empresa, Object obj) {
         if (obj instanceof Micro) {
             Micro micro = (Micro) obj;
-            empresa.addMicro(micro);
+            empresa.getMicros().add(micro);
         }
 
         if (obj instanceof Chofer) {
             Chofer chofer = (Chofer) obj;
-            empresa.addChofer(chofer);
+            empresa.getChoferes().add(chofer);
         }
 
         return empresaRepository.save(empresa);
+    }
+
+    @Override
+    public ResponseEntity<Empresa> addImagenEmpresa(Long empresaId,byte[] imagen) {
+        try {
+            Optional<Empresa> existEmpresa = empresaRepository.findById(empresaId);
+            if (existEmpresa.isPresent()) {
+                Empresa empresa = existEmpresa.get();
+                empresa.setImagen(imagen);
+                empresaRepository.save(empresa);
+                return ResponseEntity.ok(empresa);
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
